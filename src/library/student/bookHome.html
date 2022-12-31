@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <base href="../../">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="基于区块链的图书馆">
+    <meta name="keywords" content="区块链，图书馆">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>区块链图书馆</title>
+    <link href="images/library.png" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/pagination.css"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/pagination.js"></script>
+    <script type="text/javascript" src="app/web3.min.js"></script><!--core-->
+    <script type="text/javascript" src="app/truffle-contract.js"></script><!--core-->
+</head>
+
+<style type="text/css">
+    .dashed_tbl {
+        width: 100%;
+        border-top: 1px dashed #333333;
+        border-left: 1px dashed #333333;
+        text-align: center;
+    }
+    .dashed_tbl td {
+        border-bottom: 1px dashed #333333;
+        border-right: 1px dashed #333333;
+    }
+    .img-cover {
+        width: 100%;
+        height: 240px;
+    }
+    .img-caption {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.6);
+        color: white;
+        padding: 10px;
+        text-align: center;
+    }
+</style>
+
+<body>
+
+<div id="wrap">
+
+    <!--左侧菜单栏-->
+    <script type="text/javascript" src="js/nav2.js"></script>
+
+    <!--右侧内容栏-->
+    <div id="rightContent">
+        <!--右侧内容栏-->
+        <div role="tabpanel" class="tab-pane">
+            <!--顶部模块-->
+            <nav class="navbar navbar-default navbar-fixed-top">
+   <div class="container-fluid">
+     <div class="navbar-header">
+       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">切换导航</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+       <a class="navbar-brand" href="/">AUSTLIBRARY</a> 
+ 	</div>
+ <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+ 	<ul class="nav navbar-nav navbar-right">
+		<li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">类别<span class="caret"></span></a>
+		<ul class="dropdown-menu dropdown-menu-left" role="menu" id="list" onclick="handleClick">
+		 		<li><a>马列</a></li>
+		 		<li><a>哲学、宗教</a></li>
+		 		<li><a>社会科学总论</a></li>
+		 		<li><a>政治、法律</a></li>
+		 		<li><a>军事</a></li>
+		 		<li><a>文化、科学、教育、体育</a></li>
+		 		<li><a>语言、文字</a></li>
+		 		<li><a>文学</a></li>
+		 		<li><a>艺术</a></li>
+		 		<li><a>历史、地理</a></li>
+		 		<li><a>自然科学总论</a></li>
+		 		<li><a>数理科学</a></li>
+		 		<li><a>天文学、地球科学</a></li>
+		 		<li><a>生物科学</a></li>
+		 		<li><a>医药、卫生</a></li>
+		 		<li><a>农业科学</a></li>
+		 		<li><a>工业技术</a></li>
+		 		<li><a>交通运输</a></li>
+		 		<li><a>航空、航天</a></li>
+		 		<li><a>环境科学、安全科学</a></li>
+		 		<li><a>综合性图书</a></li>
+		</ul>
+		</li>
+ 	  <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">student <span class="caret"></span></a>
+ 	  </li>
+ 	  <li><a href="index.html" onClick="if(!confirm('是否确认退出？')) return false;">退出登录</a></li>
+ 	</ul>
+        <!-- <form class="navbar-form navbar-right" role="search"> -->
+            <div class="col-xs-2 input-group navbar-right">
+              <input type="text" class="form-control" id="home-keyword" autocomplete="off" placeholder="键入关键字搜索" maxlength="15">
+              <span class="input-group-btn">
+              <button class="btn btn-default" id="searchBtn"  onclick="homeSearch()">搜索</button>
+              </span> </div>
+        <!-- </form> -->
+ </div>
+ </nav>
+
+            <!--商品主页-->
+            <div class="data-div">
+                <div class="row" id="books">
+                    <div class="col-sm-6 col-md-3" hidden><!--template-->
+                        <div class="thumbnail">
+                            <a href="library/book.html?id=10086">
+                                <div style="position: relative;">
+                                    <img id="cover" class="img-cover" src="images/资本论.png" alt="图书封面"/>
+                                    <figcaption id="nameWriter" class="img-caption">算法 & Kevin Wayne</figcaption>
+                                </div>
+                            </a>
+                            <div class="caption">
+                                <table class="dashed_tbl">
+                                    <tr>
+                                        <td>借阅量: <samp id="borrowNum">100</samp></td>
+                                        <td>评分: <samp id="score">100</samp></td>
+                                    </tr>
+                                </table>
+                                <span class="label label-info">类型</span>
+                                <samp id="style">综合性图书</samp>
+                                <br/>
+                                <span class="label label-info">出版社&出版时间</span>
+                                <samp id="publisherPublishAge">人民邮电出版社&2018</samp>
+                                <br/>
+                                <span class="label label-info">书号</span>
+                                <samp id="ISBN">978-7-115-29380-0</samp>
+                                <br/>
+                                <span class="label label-info">页数</span>
+                                <samp id="pages">636</samp>
+                                <br/>
+                                <span class="label label-info">在架状态</span>
+                                <samp id="status">在架</samp>
+                                <br/>
+                                <span class="label label-info">内容简介</span>
+                                <samp id="intro">介绍算法的红宝书</samp>
+                                <br/>
+                                <div align="center">
+                                    <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#modal"
+                                            onclick="App.set(10086)">借阅
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--底部分页-->
+            <footer class="footer">
+                <div id="pagination"></div>
+            </footer>
+
+            <!--借阅-->
+            <div class="modal fade" id="modal" role="dialog" aria-labelledby="modalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="modalLabel">借阅</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                确定要借阅该图书？
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-xs btn-default" data-dismiss="modal">取 消</button>
+                            <button type="button" class="btn btn-xs btn-danger" onclick="App.borrowBooks()"id="borrowBookBtn">借阅</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+    </div><!--右侧内容栏-->
+</div><!--右侧内容栏-->
+</div>
+<script type="text/javascript" src="app/bookHome copy.js"></script><!--core-->
+</body>
+</html>

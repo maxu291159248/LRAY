@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <base href="../">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="基于区块链的图书馆">
+    <meta name="keywords" content="区块链，图书馆">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>图书馆登录注册界面</title>
+    <link href="images/library.png" rel="shortcut icon">
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="js/messages_zh.min.js"></script>
+    <script type="text/javascript" src="app/web3.min.js"></script><!--core-->
+    <script type="text/javascript" src="app/truffle-contract.js"></script><!--core-->
+    <script type="text/javascript" src="app/ipfs.js"></script><!--core-->
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+
+<div class="container right-panel-active">
+    <!-- 注册 -->
+    <div class="container_form container--signup">
+        <form action="#" class="form" id="form1">
+            <h2 class="form_title">注 册</h2>
+            <input type="text" placeholder="User" id="username1" class="input" />
+            <input type="password" autocomplete="off" placeholder="Password" id="password1" class="input" />
+            <button type="button" class="btn btn-registe" onclick="App.registe()">注-册</button>
+            <span id="tip"> </span>
+        </form>
+    </div>
+
+    <!-- 登录 -->
+    <div class="container_form container--signin">
+        <form action="#" class="form" id="form2">
+            <h2 class="form_title">登 录</h2>
+            <input type="text" placeholder="User" id="username2" class="input" />
+            <input type="password" autocomplete="off" placeholder="Password" id="password2" class="input" />
+            <button type="button" class="btn  btn-adopt" onclick="App.login()">登-录</button>
+        </form>
+    </div>
+
+    <!-- 浮层 -->
+    <div class="container_overlay">
+        <div class="overlay">
+            <div class="overlay_panel overlay--left">
+                <button class="btn" id="signIn">登 录</button>
+            </div>
+            <div class="overlay_panel overlay--right">
+                <button class="btn" id="signUp">注 册</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="app/login.js"></script><!--core-->
+<!-- 背景 -->
+<div class="slidershow">
+    <div class="slidershow--image" style="background-image: url(images/DSC01427.jpg)"></div>
+    <div class="slidershow--image" style="background-image: url(images/DSC01472.jpg)"></div>
+    <div class="slidershow--image" style="background-image: url(images/DSC01517.jpg)"></div>
+	<div class="slidershow--image" style="background-image: url(images/DSC01686.jpg)"></div>
+</div>
+<!-- partial --></body>
